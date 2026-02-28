@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeoVibes.id - Jelajahi Keindahan Indonesia</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="asset/img/logo.jpeg" alt="GeoVibes">
+                Geo<span>Vibes</span>.id
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="destinations.html">Destinasi</a></li>
+                <li><a href="#about">Tentang</a></li>
+                <li><a href="#contact">Kontak</a></li>
+                <li id="auth-links">
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="register.html" class="btn-primary">Daftar</a></li>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Jelajahi <span>Keindahan</span> Indonesia</h1>
+            <p>Temukan pengalaman tak terlupakan di berbagai destinasi wisata terbaik Indonesia. Dari pantai eksotis hingga gunung yang megah, semua ada di GeoVibes.id</p>
+            <div class="hero-buttons">
+                <a href="destinations.html" class="btn-primary">Lihat Destinasi</a>
+                <a href="register.html" class="btn-secondary">Daftar Sekarang</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-umbrella-beach"></i></div>
+                    <h3>Pantai Eksotis</h3>
+                    <p>Nikmati keindahan pantai-pantai terbaik Indonesia</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-mountain"></i></div>
+                    <h3>Gunung Megah</h3>
+                    <p>Jelajahi keindahan pegunungan yang menakjubkan</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-landmark"></i></div>
+                    <h3>Budaya Kaya</h3>
+                    <p>Temukan warisan budaya yang luar biasa</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-hiking"></i></div>
+                    <h3>Pemanduan Ahli</h3>
+                    <p>Dibimbing oleh tim profesional berpengalaman</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="destinations">
+        <div class="container">
+            <div class="section-header">
+                <h2>Destinasi Populer</h2>
+                <p>Temukan destinasi favorit untuk perjalanan Anda berikutnya</p>
+            </div>
+            <div class="destinations-grid" id="featured-destinations">
+            </div>
+            <div style="text-align: center; margin-top: 50px;">
+                <a href="destinations.html" class="btn-secondary">Lihat Semua Destinasi</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image">
+                    <img src="asset/img/WhatsApp Image 2026-02-27 at 20.20.53.jpeg" alt="Tentang GeoVibes">
+                </div>
+                <div class="about-content">
+                    <h2>Tentang Kami</h2>
+                    <p>GeoVibes.id adalah platform perjalanan yang berada di Bandung, menghadirkan pengalaman eksplorasi Indonesia secara menyenangkan dan autentik. Kami menyediakan layanan open trip, tour guide profesional, dan paket Backpakeran untuk menjelajahi berbagai destinasi menarik di seluruh Nusantara.</p>
+                    <p>Dengan GeoVibes.id, setiap perjalanan dirancang untuk memberikan suasana yang seru, pengalaman yang tak terlupakan, dan pengetahuan lokal yang mendalam. Baik kamu ingin ikut trip bersama komunitas atau menjelajah secara mandiri, kami siap menemani setiap langkah perjalananmu.</p>
+                    <p>Kami percaya bahwa eksplorasi Indonesia bukan sekadar perjalanan, tetapi pengalaman yang membangun koneksi dengan budaya, alam, dan sesama traveler. Bergabunglah bersama GeoVibes.id dan rasakan petualangan yang berbeda di setiap destinasi.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="newsletter" id="contact">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Newsletter</h2>
+                <p>Dapatkan info terbaru tentang destinasi menarik dan promo khusus langsung ke email Anda</p>
+                <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Terima kasih telah berlangganan!');">
+                    <input type="email" placeholder="Masukkan email Anda" required>
+                    <button type="submit">Berlangganan</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <img src="asset/img/logo.jpeg" alt="GeoVibes">
+                        Geo<span>Vibes</span>.id
+                    </a>
+                    <p>Partner perjalanan terbaik Anda untuk menjelajahi keindahan Indonesia. Nikmati pengalaman tak terlupakan bersama GeoVibes.id</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Menu</h4>
+                    <ul>
+                        <li><a href="index.html">Beranda</a></li>
+                        <li><a href="destinations.html">Destinasi</a></li>
+                        <li><a href="#about">Tentang</a></li>
+                        <li><a href="#contact">Kontak</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Destinasi</h4>
+                    <ul>
+                        <li><a href="destinations.html">Bali</a></li>
+                        <li><a href="destinations.html">Jawa Timur</a></li>
+                        <li><a href="destinations.html">Sumatera</a></li>
+                        <li><a href="destinations.html">NTB</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Kontak</h4>
+                    <ul>
+                        <li><a href="https://wa.me/6285864816663" target="_blank">085864816663 (Devika Natasya)</a></li>
+                        <li><a href="https://instagram.com/GeoVibes.id" target="_blank">@GeoVibes.id</a></li>
+                        <li><a href="https://tiktok.com/@GeoVibes.id" target="_blank">@GeoVibes.id</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 GeoVibes.id. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

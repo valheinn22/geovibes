@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - GeoVibes.id</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="auth-page">
+        <div class="auth-container">
+            <h2>Welcome Back</h2>
+            <p>Masuk ke akun GeoVibes.id Anda</p>
+            
+            <div id="alert-container"></div>
+            
+            <form id="login-form">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" placeholder="Masukkan email Anda" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" name="password" placeholder="Masukkan password" required>
+                </div>
+                <button type="submit" class="auth-btn">Masuk</button>
+            </form>
+            
+            <div class="auth-footer">
+                <p>Belum punya akun? <a href="register.html">Daftar sekarang</a></p>
+                <p><a href="index.html" style="font-size: 0.9rem;">Kembali ke Beranda</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const email = formData.get('email');
+            const password = formData.get('password');
+            
+            const result = login(email, password);
+            
+            const alertContainer = document.getElementById('alert-container');
+            if (result.success) {
+                alertContainer.innerHTML = '<div class="alert alert-success">Login berhasil! Mengalihkan...</div>';
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1000);
+            } else {
+                alertContainer.innerHTML = '<div class="alert alert-error">' + result.message + '</div>';
+            }
+        });
+    </script>
+</body>
+</html>

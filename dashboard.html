@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - GeoVibes.id</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="asset/img/logo.jpeg" alt="GeoVibes">
+                Geo<span>Vibes</span>.id
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="destinations.html">Destinasi</a></li>
+                <li><a href="index.html#about">Tentang</a></li>
+                <li><a href="index.html#contact">Kontak</a></li>
+                <li id="auth-links">
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="dashboard">
+        <div class="container">
+            <div class="dashboard-grid">
+                <div class="sidebar">
+                    <div style="text-align: center; margin-bottom: 30px;">
+                        <div style="width: 80px; height: 80px; background: var(--gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 2rem; color: white;">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h3 id="user-name" style="margin-bottom: 5px;">User</h3>
+                        <p id="user-email" style="color: #666; font-size: 0.9rem;">email@example.com</p>
+                    </div>
+                    <ul class="sidebar-menu">
+                        <li><a href="#" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                        <li><a href="destinations.html"><i class="fas fa-map"></i> Jelajahi Destinasi</a></li>
+                        <li><a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    </ul>
+                </div>
+                
+                <div class="dashboard-content">
+                    <div class="dashboard-header">
+                        <h2>My Bookings</h2>
+                        <a href="destinations.html" class="btn-primary">Pesan Destinasi Baru</a>
+                    </div>
+                    
+                    <div id="bookings-list">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuth();
+            
+            if (!currentUser) {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            document.getElementById('user-name').textContent = currentUser.nama_lengkap;
+            document.getElementById('user-email').textContent = currentUser.email;
+            
+            loadUserBookings();
+        });
+        
+        function loadUserBookings() {
+            const userBookings = getUserBookings();
+            const container = document.getElementById('bookings-list');
+            
+            if (userBookings.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 60px;">
+                        <i class="fas fa-ticket-alt" style="font-size: 4rem; color: #ddd;"></i>
+                        <h3 style="margin-top: 20px; color: #666;">Belum ada booking</h3>
+                        <p style="color: #999; margin-bottom: 20px;">Mulai jelajahi destinasi menarik kami!</p>
+                        <a href="destinations.html" class="btn-primary">Lihat Destinasi</a>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = `
+                <table class="bookings-table">
+                    <thead>
+                        <tr>
+                            <th>Destinasi</th>
+                            <th>Tanggal</th>
+                            <th>Jumlah</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${userBookings.map(booking => `
+                            <tr>
+                                <td>
+                                    <div style="display: flex; align-items: center; gap: 15px;">
+                                        <img src="${booking.destinationImage}" alt="${booking.destinationName}" style="width: 60px; height: 40px; object-fit: cover; border-radius: 6px;">
+                                        <span>${booking.destinationName}</span>
+                                    </div>
+                                </td>
+                                <td>${formatDate(booking.tanggal_perjalanan)}</td>
+                                <td>${booking.jumlah_orang} orang</td>
+                                <td>${booking.total_harga === 0 ? 'Gratis' : 'Rp ' + formatPrice(booking.total_harga)}</td>
+                                <td><span class="status-badge status-pending">Pending</span></td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+        
+        function formatDate(dateString) {
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return new Date(dateString).toLocaleDateString('id-ID', options);
+        }
+        
+        function logout() {
+            currentUser = null;
+            localStorage.removeItem('geovibes_user');
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
