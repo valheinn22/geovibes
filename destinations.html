@@ -43,9 +43,7 @@
                     <button onclick="filterDestinations('all', '')" class="btn-primary" style="padding: 10px 20px; border-radius: 25px; text-decoration: none; border: none; cursor: pointer;">Semua</button>
                     <button onclick="filterDestinations('pantai', '')" class="btn-secondary" style="padding: 10px 20px; border-radius: 25px; text-decoration: none; border: none; cursor: pointer;">Pantai</button>
                     <button onclick="filterDestinations('gunung', '')" class="btn-secondary" style="padding: 10px 20px; border-radius: 25px; text-decoration: none; border: none; cursor: pointer;">Gunung</button>
-                    <button onclick="filterDestinations('budaya', '')" class="btn-secondary" style="padding: 10px 20px; border-radius: 25px; text-decoration: none; border: none; cursor: pointer;">Budaya</button>
-                    <button onclick="filterDestinations('alam', '')" class="btn-secondary" style="padding: 10px 20px; border-radius: 25px; text-decoration: none; border: none; cursor: pointer;">Alam</button>
-                    <button onclick="filterDestinations('kota', '')" class="btn-secondary" style="padding: 10px 20px; border-radius: 25px; text-decoration: none; border: none; cursor: pointer;">Kota</button>
+                    <button onclick="filterDestinations('comingsoon', '')" class="btn-secondary" style="padding: 10px 20px; border-radius: 25px; text-decoration: none; border: none; cursor: pointer;">Coming Soon</button>
                 </div>
                 <form onsubmit="event.preventDefault(); filterDestinations(getCategoryFromURL(), document.getElementById('search-input').value);" style="display: flex; gap: 10px;">
                     <input type="text" id="search-input" placeholder="Cari destinasi..." style="padding: 12px 20px; border: 2px solid #eee; border-radius: 25px; width: 200px;">
@@ -83,7 +81,6 @@
                     <ul>
                         <li><a href="#" onclick="filterDestinations('pantai', '')">Pantai</a></li>
                         <li><a href="#" onclick="filterDestinations('gunung', '')">Gunung</a></li>
-                        <li><a href="#" onclick="filterDestinations('budaya', '')">Budaya</a></li>
                     </ul>
                 </div>
                 <div class="footer-links">
