@@ -14,7 +14,7 @@ function loadDestinations() {
         .then(data => {
             destinations = data;
             if (document.getElementById('destinations-grid')) {
-                renderDestinations(destinations);
+                renderDestinations(destinations, true);
             }
             if (document.getElementById('featured-destinations')) {
                 renderFeaturedDestinations();
@@ -23,11 +23,16 @@ function loadDestinations() {
         .catch(error => console.error('Error loading destinations:', error));
 }
 
-function renderDestinations(dests) {
+function renderDestinations(dests, includeComingSoon = false) {
     const grid = document.getElementById('destinations-grid');
     if (!grid) return;
     
-    if (dests.length === 0) {
+    let filteredDests = dests;
+    if (!includeComingSoon) {
+        filteredDests = dests.filter(d => d.kategori !== 'comingsoon');
+    }
+    
+    if (filteredDests.length === 0) {
         grid.innerHTML = `
             <div style="text-align: center; padding: 60px; grid-column: 1/-1;">
                 <i class="fas fa-search" style="font-size: 4rem; color: #ddd;"></i>
@@ -38,32 +43,56 @@ function renderDestinations(dests) {
         return;
     }
     
-    grid.innerHTML = dests.map(dest => `
-        <div class="destination-card">
-            <div class="destination-image">
-                <img src="${dest.gambar}" alt="${dest.nama_destinasi}">
-                <span class="destination-badge">${dest.kategori}</span>
-            </div>
-            <div class="destination-content">
-                <h3>${dest.nama_destinasi}</h3>
-                <p class="destination-location">
-                    <i class="fas fa-map-marker-alt"></i> ${dest.lokasi}
-                </p>
-                <p>${dest.deskripsi.substring(0, 80)}...</p>
-                <div class="destination-price">
-                    <span class="price">Rp ${formatPrice(dest.harga)}<span>/org</span></span>
-                    <a href="booking.html?dest=${dest.id}" class="btn-primary">Pesan</a>
+    grid.innerHTML = filteredDests.map(dest => {
+        if (dest.kategori === 'comingsoon') {
+            return `
+                <div class="destination-card" style="opacity: 0.7;">
+                    <div class="destination-image">
+                        <img src="${dest.gambar}" alt="${dest.nama_destinasi}">
+                        <span class="destination-badge" style="background: #666;">${dest.nama_destinasi}</span>
+                    </div>
+                    <div class="destination-content">
+                        <h3>${dest.nama_destinasi}</h3>
+                        <p class="destination-location">
+                            <i class="fas fa-clock"></i> Segera Hadir
+                        </p>
+                        <p>${dest.deskripsi}</p>
+                        <div class="destination-price">
+                            <span class="price" style="color: #999;">${dest.nama_destinasi}</span>
+                            <span class="btn-secondary" style="padding: 10px 20px; cursor: not-allowed;">Coming Soon</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        return `
+            <div class="destination-card">
+                <div class="destination-image">
+                    <img src="${dest.gambar}" alt="${dest.nama_destinasi}">
+                    <span class="destination-badge">${dest.kategori}</span>
+                </div>
+                <div class="destination-content">
+                    <h3>${dest.nama_destinasi}</h3>
+                    <p class="destination-location">
+                        <i class="fas fa-map-marker-alt"></i> ${dest.lokasi}
+                    </p>
+                    <p>${dest.deskripsi.substring(0, 80)}...</p>
+                    <div class="destination-price">
+                        <span class="price">Rp ${formatPrice(dest.harga)}<span>/org</span></span>
+                        <a href="booking.html?dest=${dest.id}" class="btn-primary">Pesan</a>
+                    </div>
                 </div>
             </div>
-        </div>
-    `).join('');
+        `;
+    }).join('');
 }
 
 function renderFeaturedDestinations() {
     const grid = document.getElementById('featured-destinations');
     if (!grid) return;
     
-    const featured = destinations.slice(0, 8);
+    const featured = destinations.filter(d => d.kategori !== 'comingsoon').slice(0, 4);
     grid.innerHTML = featured.map(dest => `
         <div class="destination-card">
             <div class="destination-image">
@@ -92,9 +121,16 @@ function formatPrice(price) {
 
 function filterDestinations(category, search) {
     let filtered = destinations;
+    let includeComingSoon = false;
     
-    if (category && category !== 'all') {
-        filtered = filtered.filter(d => d.kategori === category);
+    if (category === 'all') {
+        includeComingSoon = true;
+    } else if (category === 'comingsoon') {
+        filtered = destinations.filter(d => d.kategori === 'comingsoon');
+        renderDestinations(filtered, true);
+        return;
+    } else if (category) {
+        filtered = destinations.filter(d => d.kategori === category);
     }
     
     if (search) {
@@ -105,7 +141,7 @@ function filterDestinations(category, search) {
         );
     }
     
-    renderDestinations(filtered);
+    renderDestinations(filtered, includeComingSoon);
 }
 
 function checkAuth() {
