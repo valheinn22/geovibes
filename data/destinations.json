@@ -1,74 +1,47 @@
 [
   {
     "id": 1,
-    "nama_destinasi": "Pantai Kelapa",
-    "lokasi": "Bali",
-    "deskripsi": "Pantai dengan pasir putih dan air laut biru jernih yang sempurna untuk bersantai",
-    "harga": 150000,
-    "gambar": "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800",
+    "nama_destinasi": "Karimunjawa",
+    "lokasi": "Jawa Tengah",
+    "deskripsi": "Paradise of Java - Kepulauan indah di Laut Jawa dengan pantai tropis, hutan mangrove, dan kehidupan laut yang menakjubkan",
+    "harga": 450000,
+    "gambar": "https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?w=800",
     "kategori": "pantai"
   },
   {
     "id": 2,
     "nama_destinasi": "Gunung Bromo",
     "lokasi": "Jawa Timur",
-    "deskripsi": "Gunung berapi aktif dengan pemandangan matahari terbit yang menakjubkan",
-    "harga": 250000,
+    "deskripsi": "Gunung berapi aktif dengan pemandangan matahari terbit yang menakjubkan dan lautan pasir",
+    "harga": 350000,
     "gambar": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800",
     "kategori": "gunung"
   },
   {
     "id": 3,
-    "nama_destinasi": "Candi Borobudur",
+    "nama_destinasi": "Dieng",
     "lokasi": "Jawa Tengah",
-    "deskripsi": "Museum terbuka candi Buddha terbesar di dunia",
-    "harga": 50000,
-    "gambar": "https://images.unsplash.com/photo-1588828937151-1c2f0f7100bb?w=800",
-    "kategori": "budaya"
-  },
-  {
-    "id": 4,
-    "nama_destinasi": "Danau Toba",
-    "lokasi": "Sumatera Utara",
-    "deskripsi": "Danau vulkanik terbesar di Asia Tenggara dengan pemandangan indah",
-    "harga": 100000,
-    "gambar": "https://images.unsplash.com/photo-1532274402911-5a369e4c4bb5?w=800",
-    "kategori": "alam"
-  },
-  {
-    "id": 5,
-    "nama_destinasi": "Kota Tua Jakarta",
-    "lokasi": "DKI Jakarta",
-    "deskripsi": "Kawasan bersejarah dengan arsitektur kolonial Belanda",
-    "harga": 0,
-    "gambar": "https://images.unsplash.com/photo-1555992828-ca4dbe41d294?w=800",
-    "kategori": "kota"
-  },
-  {
-    "id": 6,
-    "nama_destinasi": "Tanjung Kelayang",
-    "lokasi": "Bangka Belitung",
-    "deskripsi": "Pantai dengan formasi batu granit unik dan air laut kristal",
-    "harga": 200000,
-    "gambar": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800",
-    "kategori": "pantai"
-  },
-  {
-    "id": 7,
-    "nama_destinasi": "Mount Rinjani",
-    "lokasi": "Nusa Tenggara Barat",
-    "deskripsi": "Gunungapi aktif dengan danau kawah yang indah",
-    "harga": 300000,
-    "gambar": "https://images.unsplash.com/photo-1587595431973-160d0d94add1?w=800",
+    "deskripsi": "Dataran tinggi dengan kawah火山, warna warni telaga, dan candi kuno yang mistis",
+    "harga": 280000,
+    "gambar": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800",
     "kategori": "gunung"
   },
   {
-    "id": 8,
-    "nama_destinasi": "Uluwatu",
+    "id": 4,
+    "nama_destinasi": "Bali",
     "lokasi": "Bali",
-    "deskripsi": "Cliffside temple dengan pemandangan matahari terbenam spektakuler",
-    "harga": 150000,
-    "gambar": "https://images.unsplash.com/photo-1537633552985-df8429e8048b?w=800",
-    "kategori": "budaya"
+    "deskripsi": "Pulau Dewata - Campuran sempurna antara pantai, gunung, sawah terasering, dan warisan budaya yang kaya",
+    "harga": 500000,
+    "gambar": "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800",
+    "kategori": "pantai"
+  },
+  {
+    "id": 99,
+    "nama_destinasi": "Coming Soon",
+    "lokasi": "-",
+    "deskripsi": "Destinasi baru akan segera hadir! Tetap pantau terus更新 informasi terbaru dari kami.",
+    "harga": 0,
+    "gambar": "https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=800",
+    "kategori": "comingsoon"
   }
 ]
