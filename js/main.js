@@ -79,7 +79,7 @@ function renderDestinations(dests, includeComingSoon = false) {
                     </p>
                     <p>${dest.deskripsi.substring(0, 80)}...</p>
                     <div class="destination-price">
-                        <span class="price">Rp ${formatPrice(dest.harga)}<span>/org</span></span>
+                        <span class="price">Hubungi untuk harga</span>
                         <a href="booking.html?dest=${dest.id}" class="btn-primary">Pesan</a>
                     </div>
                 </div>
@@ -106,7 +106,7 @@ function renderFeaturedDestinations() {
                 </p>
                 <p>${dest.deskripsi.substring(0, 80)}...</p>
                 <div class="destination-price">
-                    <span class="price">Rp ${formatPrice(dest.harga)}<span>/org</span></span>
+                    <span class="price">Hubungi untuk harga</span>
                     <a href="booking.html?dest=${dest.id}" class="btn-primary">Pesan</a>
                 </div>
             </div>
