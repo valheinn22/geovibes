@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking - GeoVibes.id</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="asset/img/logo.jpeg" alt="GeoVibes">
+                Geo<span>Vibes</span>.id
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="destinations.html">Destinasi</a></li>
+                <li><a href="index.html#about">Tentang</a></li>
+                <li><a href="index.html#contact">Kontak</a></li>
+                <li id="auth-links">
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="register.html" class="btn-primary">Daftar</a></li>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="booking-section">
+        <div class="booking-container">
+            <div class="booking-card">
+                <div class="booking-header">
+                    <h2>Booking Destinasi</h2>
+                    <p>Isi form berikut untuk memesan perjalanan Anda</p>
+                </div>
+                
+                <div id="destination-info" style="margin-bottom: 30px; padding: 20px; background: var(--light); border-radius: 12px;">
+                </div>
+                
+                <div id="alert-container"></div>
+                
+                <form id="booking-form">
+                    <input type="hidden" name="destination_id" id="destination-id">
+                    
+                    <div class="form-group">
+                        <label>Nama Lengkap</label>
+                        <input type="text" name="nama_lengkap" id="nama-lengkap" placeholder="Masukkan nama lengkap" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" name="email" id="email" placeholder="Masukkan email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Nomor Telepon</label>
+                        <input type="tel" name="no_telepon" id="no-telepon" placeholder="Masukkan nomor telepon" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Tanggal Perjalanan</label>
+                        <input type="date" name="tanggal_perjalanan" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Jumlah Orang</label>
+                        <input type="number" name="jumlah_orang" id="jumlah-orang" value="1" min="1" required onchange="calculateTotal()">
+                    </div>
+                    <div class="form-group">
+                        <label>Total Harga</label>
+                        <input type="text" id="total-harga" readonly style="background: #f9f9f9;">
+                    </div>
+                    <div class="form-group">
+                        <label>Catatan</label>
+                        <textarea name="catatan" placeholder="Tambahkan catatan khusus (opsional)"></textarea>
+                    </div>
+                    <button type="submit" class="auth-btn">Pesan Sekarang</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/main.js"></script>
+    <script>
+        let currentDestination = null;
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuth();
+            loadDestinationFromURL();
+        });
+        
+        function loadDestinationFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            const destId = params.get('dest');
+            
+            if (!destId) {
+                showAlert('Destinasi tidak dipilih', 'error');
+                return;
+            }
+            
+            currentDestination = getDestinationById(destId);
+            
+            if (!currentDestination) {
+                showAlert('Destinasi tidak ditemukan', 'error');
+                return;
+            }
+            
+            document.getElementById('destination-id').value = currentDestination.id;
+            
+            const user = JSON.parse(localStorage.getItem('geovibes_user') || 'null');
+            if (user) {
+                document.getElementById('nama-lengkap').value = user.nama_lengkap || '';
+                document.getElementById('email').value = user.email || '';
+                document.getElementById('no-telepon').value = user.no_telepon || '';
+            }
+            
+            const infoHTML = `
+                <div style="display: flex; gap: 20px; align-items: center;">
+                    <img src="${currentDestination.gambar}" alt="${currentDestination.nama_destinasi}" style="width: 120px; height: 80px; object-fit: cover; border-radius: 8px;">
+                    <div>
+                        <h3 style="margin-bottom: 5px;">${currentDestination.nama_destinasi}</h3>
+                        <p style="color: #666; margin-bottom: 5px;"><i class="fas fa-map-marker-alt"></i> ${currentDestination.lokasi}</p>
+                        <p style="color: var(--primary); font-weight: 600;">Rp ${currentDestination.harga === 0 ? 'Gratis' : formatPrice(currentDestination.harga)}/org</p>
+                    </div>
+                </div>
+            `;
+            document.getElementById('destination-info').innerHTML = infoHTML;
+            calculateTotal();
+        }
+        
+        function calculateTotal() {
+            if (!currentDestination) return;
+            
+            const jumlah = parseInt(document.getElementById('jumlah-orang').value) || 1;
+            const total = currentDestination.harga * jumlah;
+            
+            document.getElementById('total-harga').value = total === 0 ? 'Gratis' : 'Rp ' + formatPrice(total);
+        }
+        
+        function showAlert(message, type) {
+            const alertContainer = document.getElementById('alert-container');
+            alertContainer.innerHTML = '<div class="alert alert-' + type + '">' + message + '</div>';
+            setTimeout(() => alertContainer.innerHTML = '', 3000);
+        }
+        
+        document.getElementById('booking-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const user = JSON.parse(localStorage.getItem('geovibes_user') || 'null');
+            if (!user) {
+                showAlert('Silakan login terlebih dahulu', 'error');
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 1500);
+                return;
+            }
+            
+            const formData = new FormData(this);
+            const jumlah = parseInt(formData.get('jumlah_orang'));
+            const total = currentDestination.harga * jumlah;
+            
+            const bookingData = {
+                userId: user.id,
+                userName: user.nama_lengkap,
+                destinationId: currentDestination.id,
+                destinationName: currentDestination.nama_destinasi,
+                destinationImage: currentDestination.gambar,
+                tanggal_perjalanan: formData.get('tanggal_perjalanan'),
+                jumlah_orang: jumlah,
+                total_harga: total,
+                no_telepon: formData.get('no_telepon'),
+                catatan: formData.get('catatan')
+            };
+            
+            const result = createBooking(bookingData);
+            
+            if (result.success) {
+                showAlert('Booking berhasil! Redirect ke dashboard...', 'success');
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 1500);
+            }
+        });
+    </script>
+</body>
+</html>
